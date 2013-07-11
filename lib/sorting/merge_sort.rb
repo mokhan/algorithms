@@ -11,8 +11,8 @@ class MergeSort
 
   def merge(left, right)
     result = []
-    while left.size > 0 && right.size > 0 do
-      if left[0] < right[0]
+    until left.empty? || right.empty? do
+      if (left.first <=> right.first) == -1
         result << left.shift
       else
         result << right.shift
