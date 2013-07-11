@@ -1,6 +1,5 @@
 class QuickSort
   def sort(items)
-    p items
     return items if items.size <= 1
 
     pivot = items[rand(items.size)]
