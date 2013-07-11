@@ -1,13 +1,8 @@
 class MergeSort
   def sort(items)
     return items if items.size <= 1
-
-    if items.size % 2 == 0
-      pivot = items.size/2
-    else
-      pivot = (items.size/2) + 1
-    end
-
+    pivot = items.size/2
+    pivot += 1 unless items.size % 2 == 0
     split = items.each_slice(pivot).to_a
     merge(sort(split[0]), sort(split[1]))
   end
