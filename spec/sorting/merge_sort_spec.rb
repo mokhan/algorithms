@@ -12,11 +12,9 @@ describe MergeSort do
   end
 
   it "should sort an array of numbers" do
-    n = 600
+    n = 601
     numbers = Array.new(n) { rand(n) }
     sorted_numbers = numbers.sort
-    Benchmark.bmbm do |x|
-      x.report("merge sort") { sut.sort(numbers).should == sorted_numbers }
-    end
+    sut.sort(numbers).should == sorted_numbers
   end
 end
