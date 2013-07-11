@@ -1,6 +1,6 @@
 class LinkedListStack
   def initialize
-    @head = NullNode.new
+    @head = Node.new(nil)
   end
 
   def push(item)
@@ -9,6 +9,10 @@ class LinkedListStack
 
   def pop
     @head.pop
+  end
+
+  def count
+    0
   end
 end
 
@@ -20,10 +24,7 @@ class Node
   end
 
   def push(item)
-    if @next 
-      @next.push(item)
-    end
-
+    @next.push(item) if @next
     @next = Node.new(item)
   end
 
@@ -41,19 +42,5 @@ class Node
 
   def is_tail?
     @next == nil
-  end
-end
-
-class NullNode
-  def push(item)
-    if @next
-      @next.push(item)
-    else
-      @next = Node.new(item)
-    end
-  end
-
-  def pop
-    return @next.pop if @next
   end
 end
