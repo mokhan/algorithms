@@ -12,8 +12,10 @@ describe BubbleSort do
   end
 
   it "should be able to sort an array of numbers" do
-    n = 6
+    n = 500
     numbers = Array.new(n) { rand(n) }
-    sut.sort(numbers).should == numbers.sort
+    Benchmark.bmbm do |x|
+      x.report("bubble sort") { sut.sort(numbers).should == numbers.sort }
+    end
   end
 end
