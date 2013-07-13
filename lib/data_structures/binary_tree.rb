@@ -18,7 +18,7 @@ class BinaryTree
   end
 
   class BinaryTreeNode
-    attr_reader :left, :right
+    attr_reader :left, :right, :data
 
     def initialize(data)
       @data = data
