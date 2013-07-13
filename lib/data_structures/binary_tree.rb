@@ -1,4 +1,6 @@
 require_relative "../utility/block_visitor"
+require_relative "../utility/total_count_visitor"
+require_relative "pre_order_traversal"
 
 class BinaryTree
   def push(item)
@@ -49,25 +51,5 @@ class BinaryTree
     def accept(visitor, traversal)
       traversal.traverse(self, visitor)
     end
-  end
-
-  class TotalCountVisitor
-    attr_reader :result
-
-    def initialize
-      @result = 0
-    end
-
-    def visit(item)
-      @result += 1
-    end
-  end
-end
-
-class PreOrderTraversal
-  def traverse(node, visitor)
-    visitor.visit(node)
-    node.left.accept(visitor, self) if node.left
-    node.right.accept(visitor, self) if node.right
   end
 end
