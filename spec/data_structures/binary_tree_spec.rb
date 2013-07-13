@@ -15,7 +15,7 @@ describe BinaryTree do
   context "when many items are pushed on to the tree" do
     before :each do
       10.times do |n|
-        sut.push(n)
+        sut.push(rand(n))
       end
     end
 

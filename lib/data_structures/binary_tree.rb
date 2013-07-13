@@ -4,11 +4,8 @@ require_relative "pre_order_traversal"
 
 class BinaryTree
   def push(item)
-    if @root
-      @root.push(item)
-    else
-      @root = BinaryTreeNode.new(item) unless @root
-    end
+    @root.push(item) if @root
+    @root = BinaryTreeNode.new(item) unless @root
   end
 
   def size
@@ -34,17 +31,11 @@ class BinaryTree
 
     def push(item)
       if (item <=> @data) == -1
-        if @left
-          @left.push(item)
-        else
-          @left = BinaryTreeNode.new(item)
-        end
+        @left.push(item) if @left
+        @left = BinaryTreeNode.new(item) unless @left
       else
-        if @right
-          @right.push(item)
-        else
-          @right = BinaryTreeNode.new(item)
-        end
+        @right.push(item) if @right
+        @right = BinaryTreeNode.new(item) unless @right
       end
     end
 
