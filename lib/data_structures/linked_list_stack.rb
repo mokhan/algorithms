@@ -12,7 +12,13 @@ class LinkedListStack
   end
 
   def count
-    0
+    visitor = TotalCountVisitor.new
+    accept(visitor)
+    visitor.result
+  end
+
+  def accept(visitor)
+    @head.accept(visitor)
   end
 end
 
@@ -24,8 +30,11 @@ class Node
   end
 
   def push(item)
-    @next.push(item) if @next
-    @next = Node.new(item)
+    if @next
+      @next.push(item)
+    else
+      @next = Node.new(item)
+    end
   end
 
   def pop
@@ -40,7 +49,24 @@ class Node
     end
   end
 
+  def accept(visitor)
+    visitor.visit(self) if @data
+    @next.accept(visitor) unless is_tail?
+  end
+
   def is_tail?
     @next == nil
+  end
+end
+
+class TotalCountVisitor
+  attr_reader :result
+
+  def initialize
+    @result = 0
+  end
+
+  def visit(item)
+    @result += 1
   end
 end
