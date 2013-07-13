@@ -61,6 +61,11 @@ class AVLTree
         new_root = @right
         @right = nil
         new_root
+      elsif balance_factor > 1
+        @left.right = self
+        new_root = @left
+        @left = nil
+        new_root
       else
         self
       end

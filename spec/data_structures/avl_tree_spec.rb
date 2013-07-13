@@ -81,5 +81,30 @@ describe AVLTree do
         sut.root.right.data.should == "c"
       end
     end
+
+    context "with a left-left case" do
+      before :each do
+        sut.add("c")
+        sut.add("b")
+        sut.add("a")
+      end
+
+      it "should re-balance it self" do
+        sut.height.should == 2
+      end
+
+      it "should have a new root" do
+        sut.root.data.should == "b"
+      end
+
+      it "should change the left side" do
+        sut.root.left.data.should == "a"
+      end
+
+      it "should change the right side" do
+        sut.root.right.data.should == "c"
+      end
+    end
+
   end
 end
