@@ -13,11 +13,13 @@ class BinaryTree
     visitor.result
   end
 
-  def accept(visitor)
-    @root.accept(visitor) if @root
+  def accept(visitor, traversal = PreOrderTraversal.new)
+    @root.accept(visitor, traversal) if @root
   end
 
   class BinaryTreeNode
+    attr_reader :left, :right
+
     def initialize(data)
       @data = data
     end
@@ -38,23 +40,28 @@ class BinaryTree
       end
     end
 
-    def accept(visitor)
-      visitor.visit(self)
-      @left.accept(visitor) if @left
-      @right.accept(visitor) if @right
+    def accept(visitor, traversal)
+      traversal.traverse(self, visitor)
     end
-
   end
 
   class TotalCountVisitor
     attr_reader :result
+
     def initialize
       @result = 0
     end
 
     def visit(item)
-      p item
       @result += 1
     end
+  end
+end
+
+class PreOrderTraversal
+  def traverse(node, visitor)
+    visitor.visit(node)
+    node.left.accept(visitor, self) if node.left
+    node.right.accept(visitor, self) if node.right
   end
 end
