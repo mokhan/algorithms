@@ -57,9 +57,29 @@ describe AVLTree do
     end
   end
 
-  context "when adding an item that would cause the tree to be unbalanced" do
-    it "should re-balance it self" do
-      
+  context "when the tree is unbalanced" do
+    context "with a right-right case" do
+      before :each do
+        sut.add("a")
+        sut.add("b")
+        sut.add("c")
+      end
+
+      it "should re-balance it self" do
+        sut.height.should == 2
+      end
+
+      it "should have a new root" do
+        sut.root.data.should == "b"
+      end
+
+      it "should change the left side" do
+        sut.root.left.data.should == "a"
+      end
+
+      it "should change the right side" do
+        sut.root.right.data.should == "c"
+      end
     end
   end
 end
