@@ -1,3 +1,5 @@
+require_relative "../utility/block_visitor"
+
 class BinaryTree
   def push(item)
     if @root
@@ -15,6 +17,10 @@ class BinaryTree
 
   def accept(visitor, traversal = PreOrderTraversal.new)
     @root.accept(visitor, traversal) if @root
+  end
+
+  def each(&block)
+    accept(BlockVisitor.new(&block))
   end
 
   class BinaryTreeNode

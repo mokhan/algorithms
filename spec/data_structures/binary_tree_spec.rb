@@ -13,11 +13,20 @@ describe BinaryTree do
   end
 
   context "when many items are pushed on to the tree" do
-    it "should increase the size" do
+    before :each do
       10.times do |n|
         sut.push(n)
       end
+    end
+
+    it "should increase the size" do
       sut.size.should == 10
+    end
+
+    it "can iterate through each item" do
+      sut.each do |item|
+        item.should_not be_nil
+      end
     end
   end
 end
