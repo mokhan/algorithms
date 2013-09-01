@@ -129,5 +129,29 @@ describe AVLTree do
         sut.root.right.data.should == 5
       end
     end
+
+    context "with a right-left case" do
+      before :each do
+        sut.add(3)
+        sut.add(5)
+        sut.add(4)
+      end
+
+      it "should adjust the height" do
+        sut.height.should == 2
+      end
+
+      it "should have a new root" do
+        sut.root.data.should == 4
+      end
+
+      it "should have a proper left side" do
+        sut.root.left.data.should == 3
+      end
+
+      it "should have a proper right side" do
+        sut.root.right.data.should == 5
+      end
+    end
   end
 end

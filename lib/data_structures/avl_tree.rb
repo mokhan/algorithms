@@ -56,11 +56,11 @@ class AVLTree
     def re_balance
       p "balance factor for:#{data} is #{balance_factor}"
       if balance_factor < -1
-        p "right right case"
-        @right.left = self
-        new_root = @right
-        @right = nil
-        new_root
+        if @right.balance_factor == 1
+          right_left_case
+        else
+          right_right_case
+        end
       elsif balance_factor > 1
         if @left.balance_factor == -1
           left_right_case
@@ -73,11 +73,27 @@ class AVLTree
     end
 
     def balance_factor
-      #p "left: #{left_height}, right: #{right_height}"
       (left_height - right_height) || 0
     end
 
     private
+
+    def right_left_case
+      p "right left case"
+      right = @right
+      @right = right.left
+      @right.right = right
+      right.left = nil
+      right_right_case
+    end
+
+    def right_right_case
+      p "right right case"
+      @right.left = self
+      new_root = @right
+      @right = nil
+      new_root
+    end
 
     def left_right_case
       p "left right case"
