@@ -1,6 +1,6 @@
 require_relative "../utility/block_visitor"
 require_relative "../utility/total_count_visitor"
-require_relative "pre_order_traversal"
+require_relative "../pre_order_traversal"
 
 class BinaryTree
   def push(item)
