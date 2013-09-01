@@ -2,7 +2,6 @@ class AVLTree
   attr_reader :root
 
   def push(item)
-    p "insert #{item}"
     if @root
       @root = @root.push(item)
     else
@@ -54,7 +53,6 @@ class AVLTree
     end
 
     def re_balance
-      p "balance factor for:#{data} is #{balance_factor}"
       if balance_factor < -1
         if @right.balance_factor == 1
           right_left_case
@@ -79,7 +77,6 @@ class AVLTree
     private
 
     def right_left_case
-      p "right left case"
       right = @right
       @right = right.left
       @right.right = right
@@ -88,7 +85,6 @@ class AVLTree
     end
 
     def right_right_case
-      p "right right case"
       @right.left = self
       new_root = @right
       @right = nil
@@ -96,7 +92,6 @@ class AVLTree
     end
 
     def left_right_case
-      p "left right case"
       left = @left
       @left = @left.right
       @left.left = left
@@ -105,7 +100,6 @@ class AVLTree
     end
 
     def left_left_case
-      p "left left case"
       @left.right = self
       new_root = @left
       @left = nil
