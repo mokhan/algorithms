@@ -1,6 +1,7 @@
 require "spec_helper"
 
 def print_maze(maze)
+  puts "\e[H\e[2J"
   p " ||A||B||C||D||E||F||G||H||"
   8.times do |n|
     result = "#{n+1}|"
@@ -9,6 +10,34 @@ def print_maze(maze)
     end
     p result + "|"
   end
+end
+
+def explore_maze(maze, x, y)
+  print_maze(maze)
+  return false if y > 7 || y < 0 || x < 0 || x > 7
+  return false if maze[x][y] == "*" || maze[x][y] == "X"
+  return true if maze[x][y] == "E"
+  maze[x][y] = "X"
+  sleep 1
+  return true if explore_maze(maze, x, y-1) # up
+  return true if explore_maze(maze, x+1, y) # right
+  return true if explore_maze(maze, x, y+1) # down
+  return true if explore_maze(maze, x-1, y) # left
+  return false
+end
+
+def is_maze_solveable(maze)
+  start_x = start_y = nil
+  8.times do |x|
+    8.times do |y|
+      if maze[x][y] == 'S'
+        start_x = x
+        start_y = y
+      end
+    end
+  end
+  return false unless start_x
+  explore_maze(maze, start_x, start_y)
 end
 
 describe "maze" do
@@ -27,6 +56,6 @@ describe "maze" do
     maze[6][6] = "E"
     print_maze(maze)
 
-    #is_maze_solveable(maze).should be_true
+    is_maze_solveable(maze).should be_true
   end
 end
