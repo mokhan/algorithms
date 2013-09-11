@@ -31,7 +31,7 @@ describe "fibonacci" do
     sut.get(1).should == 1
   end
 
-  it "should return the first 10 numbers in fibonacci" do
+  it "should return the first n numbers in fibonacci" do
     f = ->(x){ x < 2 ? x : f.call(x-1) + f.call(x-2) }
     20.times do |n|
       fibonacci(n).should == f.call(n)
