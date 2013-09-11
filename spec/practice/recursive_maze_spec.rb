@@ -18,7 +18,6 @@ def explore_maze(maze, x, y)
   return false if maze[x][y] == "*" || maze[x][y] == "X"
   return true if maze[x][y] == "E"
   maze[x][y] = "X"
-  sleep 1
   return true if explore_maze(maze, x, y-1) # up
   return true if explore_maze(maze, x+1, y) # right
   return true if explore_maze(maze, x, y+1) # down
