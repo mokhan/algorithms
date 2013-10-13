@@ -1,20 +1,23 @@
 class Heap
   def initialize(items = [], sorting = QuickSort.new)
-    @items = sorting.sort(items)
+    @items = sorting.sort(items.map { |x| Node.new(x, x) })
     @sort_strategy = sorting
   end
 
-  def insert(item)
-    @items.push(item)
+  def insert(key, value=key)
+    node = Node.new(key, value)
+    @items.push(node)
     @items = @sort_strategy.sort(@items)
   end
 
   def min
-    @items.shift
+    item = @items.shift
+    item.value if item
   end
 
   def max
-    @items.pop
+    item = @items.pop
+    item.value if item
   end
 
   def empty?
@@ -26,4 +29,17 @@ class Heap
   end
 
   alias_method :push, :insert
+
+  class Node
+    attr_reader :key, :value
+
+    def initialize(key, value)
+      @key = key
+      @value = value
+    end
+
+    def <=>(other_key)
+      other_key <=> @key
+    end
+  end
 end
