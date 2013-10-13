@@ -6,9 +6,10 @@ class QuickSort
     pivot = items.sample
     less, pivots, greater = [], [], []
     items.each do |x|
-      if x < pivot
+      comparison = x <=> pivot
+      if comparison == -1
         less << x
-      elsif x > pivot
+      elsif comparison == 1
         greater << x
       else
         pivots << x
