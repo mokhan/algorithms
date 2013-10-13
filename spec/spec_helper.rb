@@ -1,4 +1,6 @@
 require 'benchmark'
+require_relative '../lib/in_order_traversal'
+
 require_relative '../lib/sorting/bubble_sort'
 require_relative '../lib/sorting/insertion_sort'
 require_relative '../lib/sorting/quick_sort'
