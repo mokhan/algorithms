@@ -24,4 +24,6 @@ class Heap
   def self.heapify(items)
     Heap.new(items)
   end
+
+  alias_method :push, :insert
 end
