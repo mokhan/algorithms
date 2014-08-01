@@ -1,6 +1,10 @@
 require "spec_helper"
 
 describe "Algorithm efficiency" do
+  let(:bubble_sort) { BubbleSort.new }
+  let(:insertion_sort) { InsertionSort.new }
+  let(:merge_sort) { MergeSort.new }
+  let(:quick_sort) { QuickSort.new }
 
   it "should sort an array of 100 numbers" do
     run(100)
@@ -21,10 +25,10 @@ describe "Algorithm efficiency" do
   def run(n)
     numbers = Array.new(n) { rand(n) }
     Benchmark.bmbm do |x|
-      x.report("#{n}-bubble") { BubbleSort.new.sort(numbers) }
-      x.report("#{n}-insertion") { InsertionSort.new.sort(numbers) }
-      x.report("#{n}-merge") { MergeSort.new.sort(numbers) }
-      x.report("#{n}-quick") { QuickSort.new.sort(numbers) }
+      x.report("#{n}-bubble") { bubble_sort.sort(numbers) }
+      x.report("#{n}-insertion") { insertion_sort.sort(numbers) }
+      x.report("#{n}-merge") { merge_sort.sort(numbers) }
+      x.report("#{n}-quick") { quick_sort.sort(numbers) }
       x.report("#{n}-ruby") { numbers.sort }
     end
   end
