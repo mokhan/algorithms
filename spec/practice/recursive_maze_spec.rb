@@ -40,7 +40,7 @@ def is_maze_solveable(maze)
 end
 
 describe "maze" do
-  it "should be solvable" do
+  it "is solvable" do
     maze = Array.new(8) { Array.new(8) { " " } }
     8.times { |n| maze[n][0] = "*" if (0...5).include?(n) } # row 1
     maze[0][1] = maze[4][1] = "*" # row 2
@@ -55,6 +55,6 @@ describe "maze" do
     maze[6][6] = "E"
     print_maze(maze)
 
-    is_maze_solveable(maze).should be_true
+    expect(is_maze_solveable(maze)).to be_truthy
   end
 end

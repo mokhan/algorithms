@@ -44,12 +44,12 @@ describe "dijkstra" do
     graph.connect(e, b, 3)
   end
 
-  it "A-B-C should == 9" do
-    dijkstra(graph, a, c).should == 9
+  it "A-B-C equals 9" do
+    expect(dijkstra(graph, a, c)).to eql(9)
   end
 
-  it "A-D should == 5" do
-    dijkstra(graph, a, d).should == 5
+  it "A-D equals 5" do
+    expect(dijkstra(graph, a, d)).to eql(5)
   end
 
   def node(details)
