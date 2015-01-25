@@ -3,14 +3,15 @@ require 'spec_helper'
 describe "combinations of strings" do
   def permutation(string)
     return [string] if string.size < 2
-    character = string[0]
-    substring = string[1..-1]
-    results = permutation(substring).each_with_object([]) do |permutation, result|
-      (0..permutation.size).each do |n|
-        result << permutation.clone.insert(n, character)
+    return [string, string.reverse] if string.size == 2
+
+    character = string[-1]
+    permutation(string.chop).inject([]) do |results, permutation|
+      0.upto(permutation.size) do |position|
+        results << permutation.clone.insert(position, character)
       end
+      results
     end
-    results
   end
 
   it 'produces each combination of 1' do
