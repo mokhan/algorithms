@@ -8,20 +8,20 @@ describe "inorder traversal" do
   let(:visitor) { double('visitor', :visit => nil) }
 
   before :each do
-    node.stub(:left).and_return(left_node)
-    node.stub(:right).and_return(right_node)
+    allow(node).to receive(:left).and_return(left_node)
+    allow(node).to receive(:right).and_return(right_node)
     sut.traverse(node, visitor)
   end
 
   it "should visit the left node first" do
-    visitor.should have_received(:visit).with(left_node)
+    expect(visitor).to have_received(:visit).with(left_node)
   end
 
   it "should visit the current node second" do
-    visitor.should have_received(:visit).with(node)
+    expect(visitor).to have_received(:visit).with(node)
   end
 
   it "should visit the right node last" do
-    visitor.should have_received(:visit).with(right_node)
+    expect(visitor).to have_received(:visit).with(right_node)
   end
 end

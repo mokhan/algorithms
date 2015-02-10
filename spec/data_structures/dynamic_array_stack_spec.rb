@@ -5,7 +5,7 @@ describe DynamicArrayStack do
 
   context "when there is nothing on the stack" do
     it "should be able to pop off nil" do
-      sut.pop.should be_nil
+      expect(sut.pop).to be_nil
     end
   end
 
@@ -13,7 +13,7 @@ describe DynamicArrayStack do
     it "should be able to pop it off" do
       n = rand
       sut.push(n)
-      sut.pop.should == n
+      expect(sut.pop).to eq(n)
     end
   end
 
@@ -23,7 +23,7 @@ describe DynamicArrayStack do
         sut.push(n)
       end
       (10..0).each do |n|
-        sut.pop.should == n
+        expect(sut.pop).to eq(n)
       end
     end
   end

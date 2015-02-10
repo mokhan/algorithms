@@ -8,7 +8,7 @@ describe BinaryTree do
 
   context "when there are no items in the tree" do
     it "should have a size of 0" do
-      sut.size.should == 0
+      expect(sut.size).to eq(0)
     end
   end
 
@@ -20,12 +20,12 @@ describe BinaryTree do
     end
 
     it "should increase the size" do
-      sut.size.should == 10
+      expect(sut.size).to eq(10)
     end
 
     it "can iterate through each item" do
       sut.each do |item|
-        item.should_not be_nil
+        expect(item).not_to be_nil
       end
     end
   end

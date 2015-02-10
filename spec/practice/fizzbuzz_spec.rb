@@ -22,21 +22,21 @@ describe FizzBuzz do
 
   it "should return Fizz for multiples of 3" do
     sut.print(3, printer)
-    printer.string.should == "Fizz"
+    expect(printer.string).to eq("Fizz")
   end
 
   it "should return Buzz for multiples of 5" do
     sut.print(5, printer)
-    printer.string.should == "Buzz"
+    expect(printer.string).to eq("Buzz")
   end
 
   it "should return FizzBuzz for multiples of 3 and 5" do
     sut.print(15, printer)
-    printer.string.should == "FizzBuzz"
+    expect(printer.string).to eq("FizzBuzz")
   end
 
   it "should return the number for everything else" do
     sut.print(16, printer)
-    printer.string.should == "16"
+    expect(printer.string).to eq("16")
   end
 end

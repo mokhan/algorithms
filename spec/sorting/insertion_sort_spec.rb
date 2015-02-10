@@ -4,18 +4,18 @@ describe InsertionSort do
   let(:sut) { InsertionSort.new }
 
   it "should sort an empty array" do
-    sut.sort([]).should == []
+    expect(sut.sort([])).to eq([])
   end
 
   it "should sort an array with one item" do
-    sut.sort([1]).should == [1]
+    expect(sut.sort([1])).to eq([1])
   end
 
   it "should sort an array of numbers" do
     n = 200
     numbers = Array.new(n) { rand(n) }
     Benchmark.bmbm do |x|
-      x.report("insertion sort") { sut.sort(numbers).should == numbers.sort }
+      x.report("insertion sort") { expect(sut.sort(numbers)).to eq(numbers.sort) }
     end
   end
 end

@@ -4,17 +4,17 @@ describe MergeSort do
   let(:sut) { MergeSort.new }
 
   it "should sort an empty array" do
-    sut.sort([]).should == []
+    expect(sut.sort([])).to eq([])
   end
 
   it "should sort an array with one item" do
-    sut.sort([2]).should == [2]
+    expect(sut.sort([2])).to eq([2])
   end
 
   it "should sort an array of numbers" do
     n = 601
     numbers = Array.new(n) { rand(n) }
     sorted_numbers = numbers.sort
-    sut.sort(numbers).should == sorted_numbers
+    expect(sut.sort(numbers)).to eq(sorted_numbers)
   end
 end

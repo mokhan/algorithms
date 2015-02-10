@@ -27,14 +27,14 @@ describe "fibonacci" do
 
   xit "should return the correct result" do
     #0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144
-    sut.get(0).should == 0
-    sut.get(1).should == 1
+    expect(sut.get(0)).to eq(0)
+    expect(sut.get(1)).to eq(1)
   end
 
   it "should return the first n numbers in fibonacci" do
     f = ->(x){ x < 2 ? x : f.call(x-1) + f.call(x-2) }
     20.times do |n|
-      fibonacci(n).should == f.call(n)
+      expect(fibonacci(n)).to eq(f.call(n))
     end
   end
 
@@ -44,7 +44,7 @@ describe "fibonacci" do
 
   it "can do factorial" do
     (1..10).each do |n|
-      factorial(n).should == (1..n).inject { |total, i| (i) * total }
+      expect(factorial(n)).to eq((1..n).inject { |total, i| (i) * total })
     end
   end
 end

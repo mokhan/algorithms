@@ -13,11 +13,11 @@ describe QuickSort do
   let(:sut) { QuickSort.new }
 
   it "should sort an empty array" do
-    sut.sort([]).should == []
+    expect(sut.sort([])).to eq([])
   end
 
   it "should sort an array with one item" do
-    sut.sort([1]).should == [1]
+    expect(sut.sort([1])).to eq([1])
   end
 
   it "should sort an array of numbers" do
@@ -25,7 +25,7 @@ describe QuickSort do
     numbers = Array.new(n) { rand(n) }
     sorted_numbers = numbers.sort
     Benchmark.bmbm do |x|
-      x.report("quick sort") { sut.sort(numbers).should == sorted_numbers }
+      x.report("quick sort") { expect(sut.sort(numbers)).to eq(sorted_numbers) }
     end
   end
 end

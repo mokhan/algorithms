@@ -4,11 +4,11 @@ describe HashTable do
   let(:sut) { HashTable.new }
 
   it "returns a default value" do
-    sut[:unkonwn].should be_nil
+    expect(sut[:unkonwn]).to be_nil
   end
 
   it "can return the value associated to a key" do
     sut[:name] = 'mo'
-    sut[:name].should == 'mo'
+    expect(sut[:name]).to eq('mo')
   end
 end

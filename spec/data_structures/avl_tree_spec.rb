@@ -5,11 +5,11 @@ describe AVLTree do
 
   context "when empty" do
     it "should have a size of 0" do
-      sut.size.should == 0
+      expect(sut.size).to eq(0)
     end
 
     it "should have have a height of 0" do
-      sut.height.should == 0
+      expect(sut.height).to eq(0)
     end
   end
 
@@ -19,11 +19,11 @@ describe AVLTree do
     end
 
     it "should have a size of 1" do
-      sut.size.should == 1
+      expect(sut.size).to eq(1)
     end
 
     it "should have a height of 1" do
-      sut.height.should == 1
+      expect(sut.height).to eq(1)
     end
   end
 
@@ -34,10 +34,10 @@ describe AVLTree do
     end
 
     it "should have a size of 2" do
-      sut.size.should == 2
+      expect(sut.size).to eq(2)
     end
     it "should have a height of 2" do
-      sut.height.should == 2
+      expect(sut.height).to eq(2)
     end
   end
 
@@ -49,11 +49,11 @@ describe AVLTree do
     end
 
     it "should have a size of 3" do
-      sut.size.should == 3
+      expect(sut.size).to eq(3)
     end
 
     it "should have a height of 2" do
-      sut.height.should == 2
+      expect(sut.height).to eq(2)
     end
   end
 
@@ -66,19 +66,19 @@ describe AVLTree do
       end
 
       it "should re-balance it self" do
-        sut.height.should == 2
+        expect(sut.height).to eq(2)
       end
 
       it "should have a new root" do
-        sut.root.data.should == "b"
+        expect(sut.root.data).to eq("b")
       end
 
       it "should change the left side" do
-        sut.root.left.data.should == "a"
+        expect(sut.root.left.data).to eq("a")
       end
 
       it "should change the right side" do
-        sut.root.right.data.should == "c"
+        expect(sut.root.right.data).to eq("c")
       end
     end
 
@@ -90,19 +90,19 @@ describe AVLTree do
       end
 
       it "should re-balance it self" do
-        sut.height.should == 2
+        expect(sut.height).to eq(2)
       end
 
       it "should have a new root" do
-        sut.root.data.should == "b"
+        expect(sut.root.data).to eq("b")
       end
 
       it "should change the left side" do
-        sut.root.left.data.should == "a"
+        expect(sut.root.left.data).to eq("a")
       end
 
       it "should change the right side" do
-        sut.root.right.data.should == "c"
+        expect(sut.root.right.data).to eq("c")
       end
     end
 
@@ -114,19 +114,19 @@ describe AVLTree do
       end
 
       it "should adjust the height" do
-        sut.height.should == 2
+        expect(sut.height).to eq(2)
       end
 
       it "should have a new root" do
-        sut.root.data.should == 4
+        expect(sut.root.data).to eq(4)
       end
 
       it "should have a proper left side" do
-        sut.root.left.data.should == 3
+        expect(sut.root.left.data).to eq(3)
       end
 
       it "should have a proper right side" do
-        sut.root.right.data.should == 5
+        expect(sut.root.right.data).to eq(5)
       end
     end
 
@@ -138,19 +138,19 @@ describe AVLTree do
       end
 
       it "should adjust the height" do
-        sut.height.should == 2
+        expect(sut.height).to eq(2)
       end
 
       it "should have a new root" do
-        sut.root.data.should == 4
+        expect(sut.root.data).to eq(4)
       end
 
       it "should have a proper left side" do
-        sut.root.left.data.should == 3
+        expect(sut.root.left.data).to eq(3)
       end
 
       it "should have a proper right side" do
-        sut.root.right.data.should == 5
+        expect(sut.root.right.data).to eq(5)
       end
     end
   end

@@ -20,6 +20,6 @@ describe "binary search" do
   it "should find the number" do
     items = [0, 5, 13, 19, 22, 41, 55, 68, 72, 81, 98]
     result = binary_search(items, 55)
-    result.should == 55
+    expect(result).to eq(55)
   end
 end
