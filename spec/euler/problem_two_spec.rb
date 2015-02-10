@@ -34,4 +34,17 @@ describe "problem two" do
     result = items.inject(0) { |memo, x| memo + x }
     expect(result).to eql(4613732)
   end
+
+  it "can accumulates manually" do
+    total = 0
+    enumerator = fib
+    current = enumerator.next
+    loop do
+      break if current >= 4_000_000
+
+      total += current if current.even?
+      current = enumerator.next
+    end
+    expect(total).to eql(4613732)
+  end
 end
