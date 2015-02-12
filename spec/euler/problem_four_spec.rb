@@ -7,13 +7,15 @@ describe 'problem four' do
       min = ([1]  + ([0] * (digits - 1))).flatten.join('').to_i
       max = ([9] * digits).flatten.join('').to_i
       puts [min, max].inspect
+      results = []
 
       max.downto(min) do |m|
         max.downto(min) do |n|
           result = m * n
-          return result if palindrome?(result)
+          results.push(result) if palindrome?(result)
         end
       end
+      results.max
     end
 
     private
@@ -25,15 +27,15 @@ describe 'problem four' do
 
   subject { Palindrome.new }
 
-  it 'can find the largest palindrom that is the product of two one digit numbers' do
+  it 'can find the largest palindrome that is the product of two one digit numbers' do
     expect(subject.largest(digits: 1)).to eql(9)
   end
 
-  it 'can find the largest palindrom that is the product of two digits' do
+  it 'can find the largest palindrome that is the product of two digits' do
     expect(subject.largest(digits: 2)).to eql(9009)
   end
 
   it 'can find the largest palindrome that is the product of two three digit numbers' do
-    expect(subject.largest(digits: 3)).to eql(580085)
+    expect(subject.largest(digits: 3)).to eql(906609)
   end
 end
