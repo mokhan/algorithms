@@ -53,4 +53,9 @@ describe "problem six" do
     subject = NaturalNumbers.new(10)
     expect(subject.difference).to eql(2640)
   end
+
+  it "solves the problem" do
+    subject = NaturalNumbers.new(100)
+    expect(subject.difference).to eql(25164150)
+  end
 end
