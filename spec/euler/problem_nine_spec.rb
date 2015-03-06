@@ -10,10 +10,6 @@ describe "problem nine" do
   class PythagoreanTriplet
     include Enumerable
 
-    def initialize(max = 100_000)
-      @max = max
-    end
-
     def each(&block)
       triplets.each(&block)
     end
@@ -22,16 +18,11 @@ describe "problem nine" do
 
     def triplets
       Enumerator.new do |yielder|
-        0.upto(@max) do |n|
-          x = n * n
-          y = (n+1) * (n+1)
-          z = (n+2) * (n+2)
-          if x + y == z
-            puts "#{n}: MATCH"
-            yielder.yield([n, n+1, n+2]) 
-          else
-            puts "#{n}: no match"
-          end
+        n = 0
+        loop do
+          x, y, z = n*n, (n+1)*(n+1), (n+2)*(n+2)
+          yielder.yield([n, n+1, n+2]) if x + y == z
+          n = n+1
         end
       end
     end
