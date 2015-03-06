@@ -47,10 +47,11 @@ describe "problem eight" do
         if result > max
           max_queue = queue.dup
           max = result
+          puts [max, max_queue].inspect
         end
       end
 
-      max_queue.join.to_i
+      max
     end
 
     private
@@ -77,6 +78,10 @@ describe "problem eight" do
   subject { MassScan.new(data) }
 
   it "returns the four digits that produce the greatest product" do
-    expect(subject.scan(digits: 4)).to eql(9989)
+    expect(subject.scan(digits: 4)).to eql(5832)
+  end
+
+  it "returns the thirteen digits that produce the greatest product" do
+    expect(subject.scan(digits: 13)).to eql(23514624000)
   end
 end
