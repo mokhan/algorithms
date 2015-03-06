@@ -30,42 +30,46 @@ describe "problem eight" do
 
   #Find the thirteen adjacent digits in the 1000-digit number that have the greatest product. What is the value of this product?
   class MassScan
-    attr_reader :data, :position
+    attr_accessor :data
 
     def initialize(data)
       @data = data.gsub(/ /, '').gsub(/\n/, '')
       @position = 0
     end
 
-    def scan(digits:)
+    def scan(digits: 4)
       queue = []
       max = 0
 
-      fill(queue)
-      puts queue.inspect
-      result = sum(queue)
-      puts result
-      max = queue.dup if result > max
-      puts max
+      until @position > @data.size
+        fill(queue, digits)
+        result = product(queue)
+        if result > max
+          max_queue = queue.dup
+          max = result
+        end
+      end
 
-      max
+      max_queue.join.to_i
     end
 
     private
 
-    def fill(queue)
-      4.times do |n|
+    def fill(queue, size)
+      available_room = size - queue.size
+      if available_room == 0
         queue.shift
-        queue.push(data[position])
-        puts position
-        position += 1
+        available_room = 1
       end
-      puts queue
+      available_room.times do |n|
+        queue.push(data[@position])
+        @position = @position + 1
+      end
     end
 
-    def sum(queue)
-      queue.inject(0) do |memo, n|
-        memo += n
+    def product(queue)
+      queue.inject(1) do |memo, n|
+        memo *= n.to_i
       end
     end
   end
