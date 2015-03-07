@@ -54,5 +54,6 @@ describe "problem nine" do
       (triplet[0] + triplet[1] + triplet[2]) == 1_000
     end
     expect(result).to eql([375, 200, 425])
+    puts 375*200*425
   end
 end
