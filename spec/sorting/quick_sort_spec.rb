@@ -10,14 +10,14 @@ require "spec_helper"
 # 3. recursively split up lists until the base case
 # 4. combine the lesser list with the greater list
 describe QuickSort do
-  let(:sut) { QuickSort.new }
+  subject { QuickSort.new }
 
   it "should sort an empty array" do
-    expect(sut.sort([])).to eq([])
+    expect(subject.sort([])).to eq([])
   end
 
   it "should sort an array with one item" do
-    expect(sut.sort([1])).to eq([1])
+    expect(subject.sort([1])).to eq([1])
   end
 
   it "should sort an array of numbers" do
@@ -25,7 +25,7 @@ describe QuickSort do
     numbers = Array.new(n) { rand(n) }
     sorted_numbers = numbers.sort
     Benchmark.bmbm do |x|
-      x.report("quick sort") { expect(sut.sort(numbers)).to eq(sorted_numbers) }
+      x.report("quick sort") { expect(subject.sort(numbers)).to eq(sorted_numbers) }
     end
   end
 end

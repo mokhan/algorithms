@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe "inorder traversal" do
-  let(:sut) { InOrderTraversal.new }
+  subject { InOrderTraversal.new }
   let(:node) { double }
   let(:left_node) { double }
   let(:right_node) { double }
@@ -10,7 +10,7 @@ describe "inorder traversal" do
   before :each do
     allow(node).to receive(:left).and_return(left_node)
     allow(node).to receive(:right).and_return(right_node)
-    sut.traverse(node, visitor)
+    subject.traverse(node, visitor)
   end
 
   it "should visit the left node first" do
