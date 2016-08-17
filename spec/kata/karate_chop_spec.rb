@@ -1,7 +1,6 @@
 #http://codekata.com/kata/kata02-karate-chop/
 require "spec_helper"
 
-
 # Write a binary chop method that takes an integer search target and a sorted array of integers.
 # It should return the integer index of the target in the array, or -1 if the target is not in the array.
 # The signature will logically be:
@@ -29,6 +28,23 @@ describe "chop" do
     else
       chop(int, items[0..mid-1])
     end
+  end
+
+  def chop(target, items)
+    low = 0
+    high = items.size
+
+    while low < high
+      mid = low + (high-low)/2
+      if items[mid] == target
+        return mid
+      elsif target > items[mid]
+        low = mid + 1
+      else
+        high = mid
+      end
+    end
+    -1
   end
 
   def assert_equal(expected, actual)
