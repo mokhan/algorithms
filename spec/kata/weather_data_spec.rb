@@ -5,40 +5,30 @@ require 'ostruct'
 #Download this text file, then write a program to output the day number (column one) 
 #with the smallest temperature spread (the maximum temperature is the second column, the minimum the third column).
 
-class Team
+class Tuple
   include Comparable
-  attr_reader :spread, :name
+  attr_reader :key, :value
 
-  def initialize(name:, goals_for:, goals_against:)
-    @name = name
-    @spread = (goals_for - goals_against).abs
+  def initialize(key:, max:, min:)
+    @key = key
+    @value = (max - min).abs
   end
 
   def <=>(other)
-    @spread <=> other.spread
+    value <=> other.value
   end
+end
 
+class Team
   def self.map_from(row)
     return nil if row[1].nil?
-    Team.new(name: row[1], goals_for: row[6].to_i, goals_against: row[8].to_i)
+    Tuple.new(key: row[1], max: row[6].to_i, min: row[8].to_i)
   end
 end
 
 class Day
-  include Comparable
-  attr_reader :day, :spread
-
-  def initialize(day:, max:, min:)
-    @day = day
-    @spread = max - min
-  end
-
-  def <=>(other)
-    @spread <=> other.spread
-  end
-
   def self.map_from(row)
-    Day.new(day: row[0], max: row[1].to_f, min: row[2].to_f)
+    Tuple.new(key: row[0], max: row[1].to_f, min: row[2].to_f)
   end
 end
 
@@ -78,7 +68,7 @@ describe "weather.dat" do
   subject { Spread.new('weather.dat', Day) }
 
   it 'returns the day with the smallest temperature spread' do
-    expect(subject.min.day).to eql('14')
+    expect(subject.min.key).to eql('14')
   end
 end
 
@@ -90,6 +80,6 @@ describe "football.dat" do
   subject { Spread.new('football.dat', Team) }
 
   it 'returns the day with the smallest temperature spread' do
-    expect(subject.min.name).to eql('Aston_Villa')
+    expect(subject.min.key).to eql('Aston_Villa')
   end
 end
