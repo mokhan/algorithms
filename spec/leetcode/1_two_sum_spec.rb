@@ -8,8 +8,8 @@ describe description do
   def two_sum(numbers, target:)
     items = {}
     numbers.each_with_index do |number, index|
-      if other_index = items[target - number]
-        return [index, other_index].sort
+      if complement = items[target - number]
+        return [index, complement].sort
       end
       items[number] = index
     end
