@@ -8,12 +8,12 @@ describe description do
   def two_sum(numbers, target:)
     items = {}
     numbers.each_with_index do |number, index|
-      next if number > target
       if other_index = items[target - number]
         return [index, other_index].sort
       end
       items[number] = index
     end
+    []
   end
 
   it 'returns 2 + 7' do
@@ -26,5 +26,11 @@ describe description do
     numbers = [3, 2, 4]
     results = two_sum(numbers, target: 6)
     expect(results).to eql([1, 2])
+  end
+
+  it 'returns -3 + 3' do
+    numbers = [-3, 4, 3, 90]
+    results = two_sum(numbers, target: 0)
+    expect(results).to eql([0, 2])
   end
 end
