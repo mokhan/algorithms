@@ -33,4 +33,10 @@ describe description do
     results = two_sum(numbers, target: 0)
     expect(results).to eql([0, 2])
   end
+
+  it 'returns 2 + 4' do
+    numbers = [1, 2, 3, 4, 5, 6]
+    results = two_sum(numbers, target: 6)
+    expect(results).to eql([1, 3])
+  end
 end
