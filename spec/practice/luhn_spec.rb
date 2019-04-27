@@ -11,76 +11,37 @@ require "spec_helper"
 # 2. Sum the odd digits:
 #   6 + 7 + 9 + 7 + 9 + 4 = 42 = s1
 # 3. The even digits:
-#     1,  8,  3,  2,  9
-#   4. Two times each even digit:
-#     2, 16,  6,  4, 18
-#   5. Sum the digits of each multiplication:
-#     2,  7,  6,  4,  9
-#   6. Sum the last:
-#     2 + 7 + 6 + 4 + 9 = 28 = s2
+#   1,  8,  3,  2,  9
+# 4. Two times each even digit:
+#   2, 16,  6,  4, 18
+# 5. Sum the digits of each multiplication:
+#   2,  7,  6,  4,  9
+# 6. Sum the last:
+#   2 + 7 + 6 + 4 + 9 = 28 = s2
 #
 # s1 + s2 = 70 which ends in zero which means {
 # that 49927398716 passes the Luhn test
 
 
 class Luhn
-  def self.valid?(cc)
-    reversed_cc = cc.to_s.reverse
-
-    step6 = sum(step_5(digits_from(reversed_cc, :odd?).map { |x| x.to_i * 2 }))
-    (step6.to_i + sum(digits_from(reversed_cc, :even?))).to_s[-1] == '0'
-  end
-
-  def self.sum(digits)
-    digits.map { |x| x.to_i }.sum
-  end
-
-  def self.digits_from(items, predicate)
-    results = []
-    items.chars.each_with_index do |item, index|
-      results << item if index.send(predicate)
-    end
-    results
-  end
-
-  def self.step_5(digits)
-    digits.map do |x|
-      sum(x.to_s.chars)
-    end
+  def self.valid?(credit_card)
+    step_1 = credit_card.digits
+    step_2 = step_1.each_with_index.find_all { |digit, index| index.even? }.map { |digit, index| digit }.sum
+    step_3 = step_1.each_with_index.find_all { |digit, index| index.odd? }.map { |digit, index| digit }.reverse
+    step_4 = step_3.map { |x| x * 2 }
+    step_5 = step_4.map { |x| x.digits.sum }
+    step_6 = step_5.sum
+    (step_2 + step_6).digits[0].zero?
   end
 end
 
 RSpec.describe Luhn do
   subject { Luhn }
 
-  describe ".odd_digits" do
-    specify { expect(Luhn.digits_from("12345", :even?)).to match_array(["1", "3", "5"]) }
-    specify do
-      expect(Luhn.digits_from("61789372994", :even?)).to match_array(['6', '7', '9', '7', '9', '4'])
-    end
-  end
-
-  describe ".sum" do
-    specify { expect(subject.sum(['6', '7', '9', '7', '9', '4'])).to eql(42) }
-  end
-
-  describe ".step_5" do
-    specify { expect(subject.step_5([2, 16,  6,  4, 18])).to match_array([2,  7,  6,  4,  9]) }
-  end
-
-  it 'passes 49927398716' do
-    expect(Luhn.valid?(49927398716)).to be true
-  end
-
-  it 'fails 49927398717' do
-    expect(Luhn.valid?(49927398717)).to be false
-  end
-
-  it 'fails 1234567812345678' do
-    expect(Luhn.valid?(1234567812345678)).to be false
-  end
-
-  it 'passes 1234567812345670' do
-    expect(Luhn.valid?(1234567812345670)).to be true
+  describe ".valid?" do
+    specify { expect(subject).to be_valid(49927398716) }
+    specify { expect(subject).not_to be_valid(49927398717) }
+    specify { expect(subject).not_to be_valid(1234567812345678) }
+    specify { expect(subject).to be_valid(1234567812345670) }
   end
 end
