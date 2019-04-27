@@ -31,7 +31,7 @@ class Luhn
 
   def self.partition(digits)
     digits.each_with_index.inject([[], []]) do |memo, (digit, index)|
-      index.even? ? memo[0].push(digit) : memo[1].push(digit)
+      memo[index.even? ? 0 : 1].push(digit)
       memo
     end
   end
