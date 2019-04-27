@@ -25,9 +25,12 @@ require "spec_helper"
 
 class Luhn
   def self.valid?(credit_card)
-    step_1 = credit_card.digits
-    step_2 = step_1.each_with_index.find_all { |digit, index| index.even? }.map { |digit, index| digit }.sum
-    step_3 = step_1.each_with_index.find_all { |digit, index| index.odd? }.map { |digit, index| digit }.reverse
+    x = credit_card.digits.each_with_index.inject(Hash.new { |hash, key| hash[key] = [] }) do |memo, (digit, index)|
+      index.even? ? memo[:odd].push(digit) : memo[:even].push(digit)
+      memo
+    end
+    step_2 = x[:odd].sum
+    step_3 = x[:even]
     step_4 = step_3.map { |x| x * 2 }
     step_5 = step_4.map { |x| x.digits.sum }
     step_6 = step_5.sum
